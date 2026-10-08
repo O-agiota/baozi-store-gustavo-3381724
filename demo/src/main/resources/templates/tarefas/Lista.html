@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Gerenciador de Tarefas</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="UTF-8" />
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" href="../../../css/style.css" />
+</head>
+
+<body>
+<div class="container mt-4">
+        <h1>Lista de Tarefas</h1>
+
+        <a th:href="@{/tarefas/cadastro}" class="btn btn-primary mb-3">Nova Tarefa</a>
+
+        <table class="table table-striped">
+                <thead>
+                        <tr>
+                                <th>Identificação da Tarefa</th>
+                                <th>Nome da Tarefa</th>
+                                <th>Data entrega</th>
+                                <th>Responsável</th>
+                                <th>Ações</th>
+                        </tr>
+                </thead>
+                <tbody>
+                        <tr th:each="tarefa : ${tarefas}">
+                                <td th:text="${tarefa.id}">1</td>
+                                <td th:text="${tarefa.nome}">Criação de conteúdo</td>
+                                <td th:text="${#temporals.format(tarefa.dataEntrega, 'dd/MM/yyyy')}">15/08/2024</td>
+                                <td th:text="${tarefa.responsavel}">Luciane</td>
+                                <td>
+                                    <a th:href="@{/tarefas/editar/{id}(id=${tarefa.id})}" class="btn btn-info btn-sm" role="button">
+                                        <span title="Editar">Editar</span>
+                                    </a> 
+                                    <a th:href="@{/tarefas/excluir/{id}(id=${tarefa.id})}" class="btn btn-danger btn-sm" role="button" onclick="return confirm('Deseja excluir?')">
+                                        <span title="Excluir">Excluir</span>
+                                    </a>
+                                </td>
+                        </tr>
+                        <!-- Se não houver tarefas -->
+                        <tr th:if="${#lists.isEmpty(tarefas)}">
+                            <td colspan="5">Nenhuma tarefa cadastrada</td>
+                        </tr>
+                </tbody>
+        </table>
+
+        <p>
+                <a th:href="@{/}">Return to home</a>
+        </p>
+        
+        <div>&copy; 2024 modelo estático</div>
+</div>
+</body>
+</html>

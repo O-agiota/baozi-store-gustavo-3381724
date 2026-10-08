@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro de Tarefas</title>
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" href="../../css/style.css" />
+</head>
+<body>
+<div class="container mt-4">
+    <h1 th:text="${tarefa.id} == null ? 'Cadastro de Tarefas' : 'Editar Tarefa'">Cadastro de Tarefas</h1>
+                
+    <form th:action="@{/tarefas/salvar}" th:object="${tarefa}" method="post">   
+        <input type="hidden" th:field="*{id}" />
+                    
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome da Tarefa</label>
+            <input type="text" class="form-control" id="nome" th:field="*{nome}" required>
+        </div>
+    
+        <div class="mb-3">
+            <label for="dataEntrega" class="form-label">Data entrega:</label>
+            <input type="date" class="form-control" id="dataEntrega" th:field="*{dataEntrega}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="responsavel" class="form-label">Responsável:</label>
+            <input type="text" class="form-control" id="responsavel" th:field="*{responsavel}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a th:href="@{/tarefas}" class="btn btn-secondary">Voltar para lista</a>
+    </form>
+
+    <div class="mt-4">&copy; 2024 modelo estático</div>
+</div>
+</body>
+</html>
